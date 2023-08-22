@@ -1,3 +1,4 @@
+import crearCarrera from '@services/admin/carreras/crearCarrera';
 import editarCarrera from '@services/admin/carreras/editarCarrera';
 import eliminarCarrera from '@services/admin/carreras/eliminarCarrera';
 import obtenerCarreras from '@services/public/obtenerCarreras';
@@ -5,6 +6,18 @@ import obtenerCarreras from '@services/public/obtenerCarreras';
 export const listCarreras = async (req, res) => {
   try {
     const obtener = await obtenerCarreras({ querys: req.query });
+    res.status(200).json({ ok: true, response: obtener });
+  } catch (err) {
+    res.status(200).json({ ok: true, msg: 'Error al obtener carreras' });
+  }
+};
+
+export const createCarrera = async (req, res) => {
+  try {
+    const obtener = await crearCarrera({
+      carrera: req.body.carrera,
+      transaction: null
+    });
     res.status(200).json({ ok: true, response: obtener });
   } catch (err) {
     res.status(200).json({ ok: true, msg: 'Error al obtener carreras' });

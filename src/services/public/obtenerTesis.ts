@@ -12,7 +12,9 @@ const obtenerTesis = async ({ querys }) => {
       apemat,
       idCarrera,
       idCategoria,
-      orderId
+      orderId,
+      limit,
+      offset
     } = querys;
 
     const filter = {};
@@ -27,7 +29,7 @@ const obtenerTesis = async ({ querys }) => {
     if (apemat) filtersAutor['apemat'] = { [Op.substring]: apemat };
     // if (orderId) options['order'] = ['id', orderId];
 
-    const tesis = await Tesis.findAll({
+    const tesis = await Tesis.findAndCountAll({
       where: filter,
       include: [
         {
@@ -45,9 +47,40 @@ const obtenerTesis = async ({ querys }) => {
           model: Categorias
         }
       ],
-      order: [['id', orderId || 'DESC']]
+      order: [['id', orderId || 'DESC']],
+      // offset: offset ? (Number(offset) === 1 ? null : Number(offset)) : null,
+      offset: offset ? Number(offset) : null,
+      limit: Number(limit) || 10
     });
 
+    return tesis;
+  } catch (err) {
+    console.log(err);
+
+    throw err;
+  }
+};
+
+export const obtenerTesisPorId = async ({ params }) => {
+  try {
+    const { idTesis } = params;
+    const tesis = await Tesis.findByPk(idTesis, {
+      include: [
+        {
+          model: Alumnos
+        },
+        {
+          model: Alumnos,
+          as: 'Alumno_coautor'
+        },
+        {
+          model: Carreras
+        },
+        {
+          model: Categorias
+        }
+      ]
+    });
     return tesis;
   } catch (err) {
     throw err;

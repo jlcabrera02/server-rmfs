@@ -1,3 +1,4 @@
+import crearCategoria from '@services/admin/categorias/crearCategoria';
 import editarCategoria from '@services/admin/categorias/editarCategoria';
 import eliminarCategoria from '@services/admin/categorias/eliminarCategoria';
 import obtenerCategoria from '@services/public/obtenerCategorias';
@@ -6,6 +7,18 @@ export const listCategorias = async (req, res) => {
   try {
     const obtener = await obtenerCategoria({ querys: req.query });
     res.status(200).json({ ok: true, response: obtener });
+  } catch (err) {
+    res.status(200).json({ ok: true, msg: 'Error al obtener categorias' });
+  }
+};
+
+export const createCategorias = async (req, res) => {
+  try {
+    const crear = await crearCategoria({
+      categoria: req.body.categoria,
+      transaction: null
+    });
+    res.status(200).json({ ok: true, response: crear });
   } catch (err) {
     res.status(200).json({ ok: true, msg: 'Error al obtener categorias' });
   }

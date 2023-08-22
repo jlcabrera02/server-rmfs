@@ -9,7 +9,7 @@ const Alumnos = sequelize.define('Alumnos', {
   avatar: {
     type: DataTypes.STRING,
     allowNull: false,
-    defaultValue: 'static/media/avatares/default.jpg'
+    defaultValue: 'static/media/avatares/default.webp'
   },
   nombre: {
     type: DataTypes.STRING,

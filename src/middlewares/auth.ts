@@ -8,7 +8,7 @@ export const verifyAdmin = async (req, res, next) => {
     const token = authorization ? authorization.replace('Bearer ', '') : null;
 
     if (!token) {
-      return res.status(404).json({ ok: false, msg: 'No token' });
+      return res.status(403).json({ ok: false, msg: 'No token' });
     }
 
     const userAuth = await Jwt.verify(token, process.env.PRIVATE_KEY, {

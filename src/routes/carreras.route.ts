@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import {
+  createCarrera,
   deleteCarrera,
   listCarreras,
   updateCarrera
@@ -10,6 +11,7 @@ const router = Router();
 
 router.get('/obtener', listCarreras);
 
+router.post('/crear', createCarrera);
 router.put('/editar/:idCarrera', verifyAdmin, updateCarrera);
 router.delete('/eliminar/:idCarrera', verifyAdmin, deleteCarrera);
 

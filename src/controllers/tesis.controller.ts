@@ -2,11 +2,20 @@ import crearTesis from '@services/admin/tesis/crearTesis';
 import crearPortada from '@services/admin/tesis/crearPortada';
 import editarTesis from '@services/admin/tesis/editarTesis';
 import eliminarTesis from '@services/admin/tesis/eliminarTesis';
-import obtenerTesis from '@services/public/obtenerTesis';
+import obtenerTesis, { obtenerTesisPorId } from '@services/public/obtenerTesis';
 
 export const listTesis = async (req, res) => {
   try {
     const tesis = await obtenerTesis({ querys: req.query });
+    res.status(200).json({ ok: true, response: tesis });
+  } catch (err) {
+    res.status(400).json({ ok: false, msg: 'Error al obtener información' });
+  }
+};
+
+export const getTesis = async (req, res) => {
+  try {
+    const tesis = await obtenerTesisPorId({ params: req.params });
     res.status(200).json({ ok: true, response: tesis });
   } catch (err) {
     res.status(400).json({ ok: false, msg: 'Error al obtener información' });
