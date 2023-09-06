@@ -2,10 +2,10 @@ import { Router } from 'express';
 import {
   deleteTesis,
   registerTesis,
-  subirPortada,
   updateTesis,
   listTesis,
-  getTesis
+  getTesis,
+  updateTesisPDF
 } from '@controllers/tesis.controller';
 import { verifyAdmin } from '@middlewares/auth';
 
@@ -14,9 +14,9 @@ const router = Router();
 router.get('/obtener', listTesis);
 router.get('/obtener/:idTesis', getTesis);
 
-router.post('/create', registerTesis);
-router.put('/cambiarPortada/:idTesis', verifyAdmin, subirPortada);
+router.post('/create', verifyAdmin, registerTesis);
 router.put('/editar/:idTesis', verifyAdmin, updateTesis);
+router.put('/editarPDF/:idTesis', verifyAdmin, updateTesisPDF);
 router.delete('/eliminar/:idTesis', verifyAdmin, deleteTesis);
 
 export default router;

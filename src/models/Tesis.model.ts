@@ -9,17 +9,21 @@ const Tesis = sequelize.define(
       primaryKey: true,
       autoIncrement: true
     },
+    ficha: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    adquisicion: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
     titulo: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    autor: {
-      type: DataTypes.STRING,
+    autores: {
+      type: DataTypes.JSON,
       allowNull: false
-    },
-    coautor: {
-      type: DataTypes.STRING,
-      allowNull: true
     },
     resumen: {
       type: DataTypes.TEXT,
@@ -37,14 +41,25 @@ const Tesis = sequelize.define(
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    tesis: {
+    opcion: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    fecha: {
+      type: DataTypes.DATEONLY,
+      allowNull: false
+    },
+    municipio: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    portada: {
+    estado: {
       type: DataTypes.STRING,
-      allowNull: false,
-      defaultValue: 'static/media/portadas/default.jpg'
+      allowNull: false
+    },
+    tesis: {
+      type: DataTypes.STRING,
+      allowNull: false
     }
   },
   {

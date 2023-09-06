@@ -1,6 +1,6 @@
 import models from '@models/index';
 import { Op } from 'sequelize';
-const { Alumnos, Carreras, Tesis, Categorias } = models;
+const { Carreras, Tesis, Categorias, Opciones } = models;
 
 const obtenerTesis = async ({ querys }) => {
   try {
@@ -33,14 +33,6 @@ const obtenerTesis = async ({ querys }) => {
       where: filter,
       include: [
         {
-          model: Alumnos,
-          where: filtersAutor
-        },
-        {
-          model: Alumnos,
-          as: 'Alumno_coautor'
-        },
-        {
           model: Carreras
         },
         {
@@ -67,11 +59,7 @@ export const obtenerTesisPorId = async ({ params }) => {
     const tesis = await Tesis.findByPk(idTesis, {
       include: [
         {
-          model: Alumnos
-        },
-        {
-          model: Alumnos,
-          as: 'Alumno_coautor'
+          model: Opciones
         },
         {
           model: Carreras

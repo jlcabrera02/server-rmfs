@@ -4,6 +4,7 @@ import Alumnos from './Alumnos.model';
 import Carreras from './Carreras.model';
 import Categorias from './Categoria.model';
 import Tesis from './Tesis.model';
+import Opciones from './Opciones.model';
 
 //Asociasiones
 
@@ -16,18 +17,16 @@ Tesis.belongsTo(Carreras, { foreignKey: 'carrera' });
 Carreras.hasMany(Alumnos, { foreignKey: 'carrera' });
 Alumnos.belongsTo(Carreras, { foreignKey: 'carrera' });
 
-Alumnos.hasMany(Tesis, { foreignKey: 'autor' });
-Tesis.belongsTo(Alumnos, { foreignKey: 'autor' });
-
-Alumnos.hasMany(Tesis, { foreignKey: 'coautor', as: 'Alumno_coautor' });
-Tesis.belongsTo(Alumnos, { foreignKey: 'coautor', as: 'Alumno_coautor' });
+Opciones.hasMany(Tesis, { foreignKey: 'opcion' });
+Tesis.belongsTo(Opciones, { foreignKey: 'opcion' });
 
 export default {
   Users,
   Alumnos,
   Carreras,
   Categorias,
-  Tesis
+  Tesis,
+  Opciones
 };
 
 export const createTables = () => {

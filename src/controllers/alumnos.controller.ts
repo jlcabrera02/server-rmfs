@@ -2,6 +2,7 @@ import crearAvatar from '@services/admin/alumnos/crearAvatar';
 import editarAlumno from '@services/admin/alumnos/editarAlumno';
 import eliminarAlumno from '@services/admin/alumnos/eliminarAlumno';
 import obtenerAlumnos from '@services/public/obtenerAlumnos';
+import crearAlumno from '@services/admin/alumnos/crearAlumno';
 
 export const listAlumnos = async (req, res) => {
   try {
@@ -39,6 +40,20 @@ export const subirAvatar = async (req, res) => {
   }
 };
 
+export const nuevoAlumno = async (req, res) => {
+  try {
+    const insertar = await crearAlumno({
+      body: req.body,
+      transaction: null
+    });
+    res.status(200).json({ ok: true, response: insertar });
+  } catch (err) {
+    res
+      .status(400)
+      .json({ ok: false, msg: 'Error al crear la imagen de perfil', err });
+  }
+};
+
 export const updateAlumno = async (req, res) => {
   try {
     const editar = await editarAlumno({
@@ -57,6 +72,8 @@ export const deleteAlumno = async (req, res) => {
     const eliminar = await eliminarAlumno({ params: req.params });
     res.status(200).json({ ok: true, response: eliminar });
   } catch (err) {
+    console.log(err);
+
     res
       .status(400)
       .json({ ok: false, msg: 'Error al eliminar el alumno', err });

@@ -10,8 +10,8 @@ import { verifyAdmin } from '@middlewares/auth';
 const router = Router();
 
 router.get('/obtener', listCategorias);
-router.post('/crear', createCategorias);
 
+router.post('/crear', verifyAdmin, createCategorias);
 router.put('/editar/:idCategoria', verifyAdmin, updateCategoria);
 router.delete('/eliminar/:idCategoria', verifyAdmin, deleteCategoria);
 
