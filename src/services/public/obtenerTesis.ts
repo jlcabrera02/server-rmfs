@@ -10,8 +10,9 @@ const obtenerTesis = async ({ querys }) => {
       nombre,
       apepat,
       apemat,
-      idCarrera,
-      idCategoria,
+      idcarrera,
+      idcategoria,
+      idopcion,
       orderId,
       limit,
       offset
@@ -21,8 +22,9 @@ const obtenerTesis = async ({ querys }) => {
     const filtersAutor = {};
 
     if (titulo) filter['titulo'] = { [Op.substring]: titulo };
-    if (idCarrera) filter['carrera'] = idCarrera;
-    if (idCategoria) filter['categoria'] = idCategoria;
+    if (idcarrera) filter['carrera'] = idcarrera;
+    if (idcategoria) filter['categoria'] = idcategoria;
+    if (idopcion) filter['opcion'] = idopcion;
     if (matricula) filtersAutor['matricula'] = matricula;
     if (nombre) filtersAutor['nombre'] = { [Op.substring]: nombre };
     if (apepat) filtersAutor['apepat'] = { [Op.substring]: apepat };
@@ -69,6 +71,10 @@ export const obtenerTesisPorId = async ({ params }) => {
         }
       ]
     });
+    if (!tesis) {
+      throw { ok: false, code: 400, msg: 'No se encontro la tesis' };
+    }
+
     return tesis;
   } catch (err) {
     throw err;

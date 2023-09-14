@@ -3,3 +3,7 @@ node_modules
 src/public/media
 
 build
+
+.dockerignore
+Dockerfile
+fly.toml
