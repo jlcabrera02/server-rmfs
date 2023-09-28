@@ -3,6 +3,8 @@ import editarAlumno from '@services/admin/alumnos/editarAlumno';
 import eliminarAlumno from '@services/admin/alumnos/eliminarAlumno';
 import obtenerAlumnos from '@services/public/obtenerAlumnos';
 import crearAlumno from '@services/admin/alumnos/crearAlumno';
+import path from 'path';
+import fs from 'fs';
 
 export const listAlumnos = async (req, res) => {
   try {
@@ -13,17 +15,33 @@ export const listAlumnos = async (req, res) => {
   }
 };
 
+export const obtenerAvatar = async (req, res) => {
+  const nombreImagen = req.params.imagen;
+  const rutaImagen = path.join('data/', nombreImagen);
+
+  // Utiliza fs para leer la imagen del volumen y enviarla como respuesta
+  fs.readFile(rutaImagen, (err, data) => {
+    if (err) {
+      res.status(404).send('Imagen no encontrada');
+    } else {
+      // Establece el encabezado Content-Type adecuado (p. ej., image/jpeg)
+      res.contentType('image/jpeg');
+      res.send(data);
+    }
+  });
+};
+
 export const subirAvatar = async (req, res) => {
   try {
     const { perfil } = req.files;
     const extencion = perfil.mimetype.replace('image/', '');
 
-    const urlSave = `static/media/avatares/${perfil.md5}.${extencion}`;
-    perfil.mv(`src/${urlSave.replace('static', 'public')}`, async (err) => {
+    const urlSave = `api/alumnos/avatar/${perfil.md5}.${extencion}`;
+    perfil.mv(`data/${perfil.md5}.${extencion}`, async (err) => {
       if (err) {
         return res
           .status(400)
-          .json({ ok: false, code: 400, msg: 'No se pudo cargar el perfil' });
+          .json({ ok: false, code: 400, msg: 'No se pudo guardar el perfil' });
       }
 
       const create = await crearAvatar({
@@ -34,6 +52,7 @@ export const subirAvatar = async (req, res) => {
       res.status(200).json({ ok: true, response: create });
     });
   } catch (err) {
+    console.log('error peticion', err);
     res
       .status(400)
       .json({ ok: false, msg: 'Error al crear la imagen de perfil', err });

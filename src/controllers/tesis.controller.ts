@@ -3,6 +3,8 @@ import editarTesis from '@services/admin/tesis/editarTesis';
 import eliminarTesis from '@services/admin/tesis/eliminarTesis';
 import editarTesisPDF from '@services/admin/tesis/updateTesisPDF';
 import obtenerTesis, { obtenerTesisPorId } from '@services/public/obtenerTesis';
+import path from 'path';
+import fs from 'fs';
 
 export const listTesis = async (req, res) => {
   try {
@@ -22,11 +24,26 @@ export const getTesis = async (req, res) => {
   }
 };
 
+export const getTesisFile = async (req, res) => {
+  const archivo = req.params.archivo;
+  const rutaArchivo = path.join('/data/', archivo);
+
+  // Utiliza fs para leer la imagen del volumen y enviarla como respuesta
+  fs.readFile(rutaArchivo, (err, data) => {
+    if (err) {
+      res.status(404).send('Archivo no encontrado');
+    } else {
+      res.contentType('application/pdf charset=utf-8');
+      res.send(data);
+    }
+  });
+};
+
 export const registerTesis = async (req, res) => {
   try {
     const tesis = req.files.tesis;
-    const urlSave = `static/media/tesis/${tesis.md5}.pdf`;
-    tesis.mv(`src/${urlSave.replace('static', 'public')}`, async (err) => {
+    const urlSave = `api/tesis/tesispdf/${tesis.md5}.pdf`;
+    tesis.mv(`/data/${tesis.md5}.pdf`, async (err) => {
       if (err) {
         return res
           .status(400)
@@ -45,8 +62,8 @@ export const registerTesis = async (req, res) => {
 export const updateTesisPDF = async (req, res) => {
   try {
     const tesis = req.files.tesis;
-    const urlSave = `static/media/tesis/${tesis.md5}.pdf`;
-    tesis.mv(`src/${urlSave.replace('static', 'public')}`, async (err) => {
+    const urlSave = `api/tesis/tesispdf/${tesis.md5}.pdf`;
+    tesis.mv(`/data/${tesis.md5}.pdf`, async (err) => {
       if (err) {
         return res
           .status(400)

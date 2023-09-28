@@ -3,6 +3,7 @@ import {
   deleteAlumno,
   listAlumnos,
   nuevoAlumno,
+  obtenerAvatar,
   subirAvatar,
   updateAlumno
 } from '@controllers/alumnos.controller';
@@ -12,6 +13,7 @@ const router = Router();
 
 router.get('/obtener', listAlumnos);
 
+router.get('/avatar/:imagen', obtenerAvatar);
 router.post('/insertar', verifyAdmin, nuevoAlumno);
 router.put('/cambiarPerfilXmatricula/:matricula', verifyAdmin, subirAvatar);
 router.put('/editarXmatricula/:matricula', verifyAdmin, updateAlumno);

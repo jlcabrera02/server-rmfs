@@ -5,7 +5,8 @@ import {
   updateTesis,
   listTesis,
   getTesis,
-  updateTesisPDF
+  updateTesisPDF,
+  getTesisFile
 } from '@controllers/tesis.controller';
 import { verifyAdmin } from '@middlewares/auth';
 
@@ -13,6 +14,7 @@ const router = Router();
 
 router.get('/obtener', listTesis);
 router.get('/obtener/:idTesis', getTesis);
+router.get('/tesispdf/:archivo', getTesisFile);
 
 router.post('/create', verifyAdmin, registerTesis);
 router.put('/editar/:idTesis', verifyAdmin, updateTesis);
