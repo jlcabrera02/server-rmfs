@@ -24,3 +24,7 @@ export const verifyAdmin = async (req, res, next) => {
     res.status(403).json({ ok: false, msg: 'No autorizado' });
   }
 };
+
+export const sing = async (data: any) => {
+  return Jwt.sign(data, process.env.PRIVATE_KEY, { expiresIn: 60 * 60 * 24 });
+};

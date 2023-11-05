@@ -1,32 +1,11 @@
 import sequelize from '@config/db.config';
+import Blogs from './Blogs.model';
 import Users from './Users.model';
-import Alumnos from './Alumnos.model';
-import Carreras from './Carreras.model';
-import Categorias from './Categoria.model';
-import Tesis from './Tesis.model';
-import Opciones from './Opciones.model';
-
 //Asociasiones
 
-Categorias.hasMany(Tesis, { foreignKey: 'categoria' });
-Tesis.belongsTo(Categorias, { foreignKey: 'categoria' });
-
-Carreras.hasMany(Tesis, { foreignKey: 'carrera' });
-Tesis.belongsTo(Carreras, { foreignKey: 'carrera' });
-
-Carreras.hasMany(Alumnos, { foreignKey: 'carrera' });
-Alumnos.belongsTo(Carreras, { foreignKey: 'carrera' });
-
-Opciones.hasMany(Tesis, { foreignKey: 'opcion' });
-Tesis.belongsTo(Opciones, { foreignKey: 'opcion' });
-
 export default {
-  Users,
-  Alumnos,
-  Carreras,
-  Categorias,
-  Tesis,
-  Opciones
+  Blogs,
+  Users
 };
 
 export const createTables = () => {
