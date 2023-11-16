@@ -20,7 +20,7 @@ const Blogs = sequelize.define('Blogs', {
     allowNull: false
   },
   descripcion: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
     allowNull: false
   },
   imagen: {
