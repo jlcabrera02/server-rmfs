@@ -19,10 +19,22 @@ const Blogs = sequelize.define('Blogs', {
     type: DataTypes.TEXT,
     allowNull: false
   },
+  descripcion: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  imagen: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
   mostrar: {
     type: DataTypes.BOOLEAN,
     allowNull: false,
     defaultValue: true
+  },
+  usuario: {
+    type: DataTypes.STRING,
+    allowNull: true
   }
 });
 
