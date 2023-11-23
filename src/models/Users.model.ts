@@ -21,7 +21,8 @@ const Users = sequelize.define('Users', {
   },
   perfil: {
     type: DataTypes.STRING,
-    allowNull: true
+    allowNull: false,
+    defaultValue: 'static/public/media/default.webp'
   },
   password: {
     type: DataTypes.STRING,

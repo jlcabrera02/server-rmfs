@@ -1,11 +1,14 @@
 import sequelize from '@config/db.config';
 import Blogs from './Blogs.model';
 import Users from './Users.model';
+import Banners from './Banners.model';
+
 //Asociasiones
 
 export default {
   Blogs,
-  Users
+  Users,
+  Banners
 };
 
 export const createTables = () => {

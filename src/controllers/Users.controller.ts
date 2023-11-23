@@ -19,6 +19,6 @@ export const findUser = async (req, res) => {
 
     return res.status(200).json({ success: true, response: data });
   } catch (err) {
-    return res.status(403).json({ success: false, response: err });
+    return res.status(400).json({ success: false, response: err });
   }
 };
