@@ -1,7 +1,7 @@
 import sequelize from '@config/db.config';
 import { DataTypes } from 'sequelize';
 
-const Banners = sequelize.define('Banners', {
+const Banners = sequelize.define('banners', {
   idbanner: {
     type: DataTypes.INTEGER,
     primaryKey: true,

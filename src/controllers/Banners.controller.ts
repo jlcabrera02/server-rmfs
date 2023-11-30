@@ -4,7 +4,7 @@ import {
   editarBanner as eb,
   eliminarBanner as db
 } from '@services/Banners';
-import guardarImagen from 'src/utils/guardarImagen';
+import guardarImagen from '@utils/guardarImagen';
 
 export const crearBanner = async (req, res) => {
   try {

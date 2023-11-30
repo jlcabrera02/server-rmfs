@@ -18,9 +18,9 @@ export const crearBlog = async (req, res) => {
 
 export const obtenerBlogs = async (req, res) => {
   try {
-    const response = await ob(req.query);
+    const [response, totalCounts] = await ob(req.query);
 
-    res.status(200).json({ success: true, response });
+    res.status(200).json({ success: true, response, totalCounts });
   } catch (err) {
     console.log(err);
 
@@ -45,6 +45,8 @@ export const editarBlogs = async (req, res) => {
     const response = eb(req.body, Number(req.params.idblog));
     res.status(200).json({ success: true, response });
   } catch (err) {
+    console.log(err);
+
     res.status(400).json({ success: true, response: err });
   }
 };

@@ -2,7 +2,7 @@ import sequelize from '@config/db.config';
 import useBcrypt from 'sequelize-bcrypt';
 import { DataTypes } from 'sequelize';
 
-const Users = sequelize.define('Users', {
+const Users = sequelize.define('users', {
   username: {
     type: DataTypes.STRING,
     primaryKey: true

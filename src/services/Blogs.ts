@@ -28,13 +28,17 @@ export const obtenerBlogs = async (query: any) => {
       delete filtros.mostrar;
     }
 
+    const totalCounts = await Blogs.count({ where: filtros });
+
     const obtenerBlogs = await Blogs.findAll({
+      attributes: ['descripcion', 'idblog', 'imagen', 'mostrar', 'titulo'],
       where: filtros,
       limit: query.limit ? Number(query.limit) : null,
+      offset: query.offset ? Number(query.offset) : null,
       order: [['createdAt', 'DESC']]
     });
 
-    return obtenerBlogs;
+    return [obtenerBlogs, totalCounts];
   } catch (err) {
     throw err;
   }

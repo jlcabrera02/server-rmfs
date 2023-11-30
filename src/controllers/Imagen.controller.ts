@@ -1,5 +1,5 @@
 import { guardarImagen as gim } from '@services/Imagenes';
-import guardarImgServer from 'src/utils/guardarImagen';
+import guardarImgServer from '@utils/guardarImagen';
 
 export const guardarImagen = async (req, res) => {
   try {

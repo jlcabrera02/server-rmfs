@@ -1,7 +1,7 @@
 import sequelize from '@config/db.config';
 import { DataTypes } from 'sequelize';
 
-const Blogs = sequelize.define('Blogs', {
+const Blogs = sequelize.define('blogs', {
   idblog: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -16,7 +16,7 @@ const Blogs = sequelize.define('Blogs', {
     allowNull: false
   },
   content: {
-    type: DataTypes.TEXT,
+    type: DataTypes.TEXT('long'),
     allowNull: false
   },
   descripcion: {
@@ -24,7 +24,7 @@ const Blogs = sequelize.define('Blogs', {
     allowNull: false
   },
   imagen: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT('long'),
     allowNull: false
   },
   mostrar: {

@@ -14,9 +14,9 @@ config();
 const app = express();
 app.set('PORT', process.env.PORT);
 
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json({ limit: '50mb' }));
-app.use(cors());
 app.use(morgan('dev'));
 app.use(fileUpload()); //Para subir archivos
 app.use('/static', express.static(path.join(__dirname, 'public')));
